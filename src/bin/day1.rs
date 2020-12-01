@@ -1,5 +1,5 @@
 fn main() {
-    let input = std::fs::read_to_string("inputs/day1-1.txt").unwrap();
+    let input = std::fs::read_to_string("inputs/day1.txt").unwrap();
     let list = parse_input(&input).unwrap();
     let (a, b) = find_pair(&list).unwrap();
     println!("Part 1 - Answer: {}", a * b);
@@ -46,17 +46,18 @@ fn find_triple(list: &[u32]) -> Option<(u32, u32, u32)> {
 mod tests {
     use super::*;
 
-    #[test]
-    fn test1() {
-        let input = "1721
+    const INPUT: &str = "1721
         979
         366
         299
         675
         1456";
+
+    #[test]
+    fn test1() {
         let output = 514579;
         assert_eq!(
-            find_pair(&parse_input(input).unwrap())
+            find_pair(&parse_input(INPUT).unwrap())
                 .map(|(a, b)| a * b)
                 .unwrap(),
             output
@@ -65,15 +66,9 @@ mod tests {
 
     #[test]
     fn test2() {
-        let input = "1721
-        979
-        366
-        299
-        675
-        1456";
         let output = 241861950;
         assert_eq!(
-            find_triple(&parse_input(input).unwrap())
+            find_triple(&parse_input(INPUT).unwrap())
                 .map(|(a, b, c)| a * b * c)
                 .unwrap(),
             output
