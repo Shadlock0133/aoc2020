@@ -26,7 +26,7 @@ fn parse_input(input: &str) -> Vec<(u8, u8)> {
                     _ => unreachable!(),
                 };
             }
-            for ch in line[7..].chars() {
+            for ch in line[7..][..3].chars() {
                 column <<= 1;
                 column |= match ch {
                     'L' => 0,
@@ -66,9 +66,11 @@ mod tests {
             "BFFFBBFRRR
             FFFBBBFRRR
             BBFFBBFRLL";
+
         let res = parse_input(INPUT);
         let output = [(70, 7), (14, 7), (102, 4)];
         assert_eq!(res, output);
+
         let res: Vec<_> = res.iter().map(calculate_id).collect();
         let output = [567, 119, 820];
         assert_eq!(res, output);
