@@ -32,7 +32,7 @@ fn calculate_sum(groups: &[Group]) -> usize {
     groups
         .iter()
         .map(|group| {
-            group.iter().flatten().copied().collect::<HashSet<char>>()
+            group.iter().skip(1).fold(group[0].clone(), |acc, x| &acc | x)
         })
         .map(|group| group.len())
         .sum()
