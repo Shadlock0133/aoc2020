@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 fn main() {
     let input = std::fs::read_to_string("inputs/day7.txt").unwrap();
     let rules = parse_input(&input);
@@ -7,9 +9,10 @@ fn main() {
     println!("Part 2 - Answer: {}", res);
 }
 
-type Rule<'a> = (&'a str, Vec<(usize, &'a str)>);
+type Rule<'a> = Vec<(usize, &'a str)>;
+type Rules<'a> = HashMap<&'a str, Rule<'a>>;
 
-fn parse_input(input: &str) -> Vec<Rule> {
+fn parse_input(input: &str) -> Rules {
     input
         .lines()
         .filter_map(|line| {
@@ -45,36 +48,34 @@ fn parse_input(input: &str) -> Vec<Rule> {
         .collect()
 }
 
-fn check_1(rules: &[Rule]) -> usize {
-    fn check_bag(color: &str, rule: &Rule, rules: &[Rule]) -> bool {
-        let (_, content) = rule;
-        if content.iter().any(|(_, name)| *name == color) {
+fn check_1(rules: &Rules) -> usize {
+    fn check_bag<'a>(color: &str, rule: &Rule<'a>, rules: &Rules<'a>) -> bool {
+        if rule.iter().any(|(_, name)| *name == color) {
             return true;
         }
-        content.iter().any(|(_, rname)| {
-            let rule = rules.iter().find(|(name, _)| name == rname).unwrap();
+        rule.iter().any(|(_, name)| {
+            let rule = &rules[name];
             check_bag(color, rule, rules)
         })
     }
     rules
-        .iter()
+        .values()
         .filter(|rule| {
             check_bag("shiny gold", rule, rules)
         })
         .count()
 }
 
-fn check_2(rules: &[Rule]) -> usize {
-    fn check_bag(rule: &Rule, rules: &[Rule]) -> usize {
-        let (_, content) = rule;
-        content.iter()
-            .map(|(count, rname)| {
-                let rule = rules.iter().find(|(name, _)| name == rname).unwrap();
+fn check_2(rules: &Rules) -> usize {
+    fn check_bag<'a>(rule: &Rule<'a>, rules: &Rules<'a>) -> usize {
+        rule.iter()
+            .map(|(count, name)| {
+                let rule = &rules[name];
                 count * (1 + check_bag(rule, rules))
             })
             .sum()
     }
-    let shiny_gold = rules.iter().find(|(name, _)| *name == "shiny gold").unwrap();
+    let shiny_gold = &rules["shiny gold"];
     check_bag(shiny_gold, rules)
 }
 
