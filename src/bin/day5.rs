@@ -15,7 +15,9 @@ fn parse_input(input: &str) -> Vec<(u8, u8)> {
         .lines()
         .filter_map(|line| {
             let line = line.trim();
-            if line.is_empty() { return None; }
+            if line.is_empty() {
+                return None;
+            }
             let mut row = 0;
             let mut column = 0;
             for ch in line[..7].chars() {
@@ -62,8 +64,7 @@ mod tests {
 
     #[test]
     fn test() {
-        const INPUT: &str =
-            "BFFFBBFRRR
+        const INPUT: &str = "BFFFBBFRRR
             FFFBBBFRRR
             BBFFBBFRLL";
 

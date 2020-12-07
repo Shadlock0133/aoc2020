@@ -32,7 +32,10 @@ fn calculate_sum(groups: &[Group]) -> usize {
     groups
         .iter()
         .map(|group| {
-            group.iter().skip(1).fold(group[0].clone(), |acc, x| &acc | x)
+            group
+                .iter()
+                .skip(1)
+                .fold(group[0].clone(), |acc, x| &acc | x)
         })
         .map(|group| group.len())
         .sum()
@@ -42,7 +45,10 @@ fn calculate_product(groups: &[Group]) -> usize {
     groups
         .iter()
         .map(|group| {
-            group.iter().skip(1).fold(group[0].clone(), |acc, x| &acc & x)
+            group
+                .iter()
+                .skip(1)
+                .fold(group[0].clone(), |acc, x| &acc & x)
         })
         .map(|group| group.len())
         .sum()
@@ -52,8 +58,7 @@ fn calculate_product(groups: &[Group]) -> usize {
 mod tests {
     use super::*;
 
-    const INPUT: &str = 
-        "abc
+    const INPUT: &str = "abc
 
         a
         b

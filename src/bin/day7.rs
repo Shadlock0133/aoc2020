@@ -60,9 +60,7 @@ fn check_1(rules: &Rules) -> usize {
     }
     rules
         .values()
-        .filter(|rule| {
-            check_bag("shiny gold", rule, rules)
-        })
+        .filter(|rule| check_bag("shiny gold", rule, rules))
         .count()
 }
 
@@ -83,8 +81,7 @@ fn check_2(rules: &Rules) -> usize {
 mod tests {
     use super::*;
 
-    const INPUT: &str =
-        "light red bags contain 1 bright white bag, 2 muted yellow bags.
+    const INPUT: &str = "light red bags contain 1 bright white bag, 2 muted yellow bags.
         dark orange bags contain 3 bright white bags, 4 muted yellow bags.
         bright white bags contain 1 shiny gold bag.
         muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.
@@ -110,8 +107,7 @@ mod tests {
 
     #[test]
     fn test2_2() {
-        const INPUT2: &str =
-            "shiny gold bags contain 2 dark red bags.
+        const INPUT2: &str = "shiny gold bags contain 2 dark red bags.
             dark red bags contain 2 dark orange bags.
             dark orange bags contain 2 dark yellow bags.
             dark yellow bags contain 2 dark green bags.

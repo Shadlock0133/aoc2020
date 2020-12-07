@@ -1,15 +1,9 @@
 fn main() {
     let input = std::fs::read_to_string("inputs/day2.txt").unwrap();
     let list = parse_input(&input).unwrap();
-    let res = list
-        .iter()
-        .filter(|x| check_correct_1(x))
-        .count();
+    let res = list.iter().filter(|x| check_correct_1(x)).count();
     println!("Part 1 - Answer: {}", res);
-    let res = list
-        .iter()
-        .filter(|x| check_correct_2(x))
-        .count();
+    let res = list.iter().filter(|x| check_correct_2(x)).count();
     println!("Part 2 - Answer: {}", res);
 }
 

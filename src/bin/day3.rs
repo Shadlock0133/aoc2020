@@ -1,12 +1,6 @@
 use std::ops::Index;
 
-const SLOPES: &[(usize, usize)] = &[
-    (1, 1),
-    (3, 1),
-    (5, 1),
-    (7, 1),
-    (1, 2),
-];
+const SLOPES: &[(usize, usize)] = &[(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];
 
 fn main() {
     let input = std::fs::read_to_string("inputs/day3.txt").unwrap();
@@ -67,8 +61,7 @@ fn check(map: &Map, step: (usize, usize)) -> usize {
 mod tests {
     use super::*;
 
-    const INPUT: &str = 
-    "..##.......
+    const INPUT: &str = "..##.......
     #...#...#..
     .#....#..#.
     ..#.#...#.#
