@@ -48,7 +48,7 @@ fn calculate_id(pos: &(u8, u8)) -> u16 {
 
 fn find_seat(list: &[u16]) -> u16 {
     let mut list = list.to_vec();
-    list.sort();
+    list.sort_unstable();
     for seats in list.windows(2) {
         let [a, b]: [u16; 2] = seats.try_into().unwrap();
         if a + 2 == b {

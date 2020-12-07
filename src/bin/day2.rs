@@ -7,7 +7,9 @@ fn main() {
     println!("Part 2 - Answer: {}", res);
 }
 
-fn parse_input(input: &str) -> Result<Vec<(u8, u8, char, &str)>, Box<dyn std::error::Error>> {
+type Line<'a> = (u8, u8, char, &'a str);
+
+fn parse_input(input: &str) -> Result<Vec<Line>, Box<dyn std::error::Error>> {
     input
         .lines()
         .map(|x| {
@@ -23,13 +25,13 @@ fn parse_input(input: &str) -> Result<Vec<(u8, u8, char, &str)>, Box<dyn std::er
         .collect()
 }
 
-fn check_correct_1(line: &(u8, u8, char, &str)) -> bool {
+fn check_correct_1(line: &Line) -> bool {
     let &(lower, upper, char, password) = line;
     let count = password.chars().filter(|x| *x == char).count() as u8;
     (lower..=upper).contains(&count)
 }
 
-fn check_correct_2(line: &(u8, u8, char, &str)) -> bool {
+fn check_correct_2(line: &Line) -> bool {
     let &(a, b, char, password) = line;
     let first = password.chars().nth(a as usize - 1).unwrap() == char;
     let second = password.chars().nth(b as usize - 1).unwrap() == char;

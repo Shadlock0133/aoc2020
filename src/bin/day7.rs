@@ -9,8 +9,8 @@ fn main() {
     println!("Part 2 - Answer: {}", res);
 }
 
-type Rule<'a> = Vec<(usize, &'a str)>;
-type Rules<'a> = HashMap<&'a str, Rule<'a>>;
+type Rule<'a> = (usize, &'a str);
+type Rules<'a> = HashMap<&'a str, Vec<Rule<'a>>>;
 
 fn parse_input(input: &str) -> Rules {
     input
@@ -49,7 +49,7 @@ fn parse_input(input: &str) -> Rules {
 }
 
 fn check_1(rules: &Rules) -> usize {
-    fn check_bag<'a>(color: &str, rule: &Rule<'a>, rules: &Rules<'a>) -> bool {
+    fn check_bag<'a>(color: &str, rule: &[Rule<'a>], rules: &Rules<'a>) -> bool {
         if rule.iter().any(|(_, name)| *name == color) {
             return true;
         }
@@ -65,7 +65,7 @@ fn check_1(rules: &Rules) -> usize {
 }
 
 fn check_2(rules: &Rules) -> usize {
-    fn check_bag<'a>(rule: &Rule<'a>, rules: &Rules<'a>) -> usize {
+    fn check_bag<'a>(rule: &[Rule<'a>], rules: &Rules<'a>) -> usize {
         rule.iter()
             .map(|(count, name)| {
                 let rule = &rules[name];
