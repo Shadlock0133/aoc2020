@@ -27,8 +27,9 @@ fn is_valid(preamble: &[u64], data: u64) -> bool {
 
 fn check_1(data: &[u64], preamble: usize) -> u64 {
     for i in 0..data.len() - preamble {
-        let (data, rest) = data.split_at(i).1.split_at(preamble);
-        let x = *rest.split_first().unwrap().0;
+        let data = &data[i..];
+        let (data, rest) = data.split_at(preamble);
+        let x = rest[0];
         if !is_valid(data, x) {
             return x;
         }
