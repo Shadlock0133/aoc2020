@@ -1,7 +1,7 @@
 fn main() {
     let input = std::fs::read_to_string("inputs/day!.txt").unwrap();
-    let rules = parse_input(&input);
-    let res = check_1(&rules);
+    let thing = parse_input(&input);
+    let res = check_1(&thing);
     println!("Part 1 - Answer: {}", res);
 }
 
@@ -9,16 +9,15 @@ fn parse_input(input: &str) -> ! {
     todo!()
 }
 
-fn check_1(rules: &!) -> ! {
-    
+fn check_1(thing: &!) -> ! {
+    todo!()
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    const INPUT: &str =
-        "";
+    const INPUT: &str = "";
 
     #[test]
     fn test1() {
