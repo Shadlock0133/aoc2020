@@ -21,13 +21,11 @@ fn check_1(list: &[u32]) -> usize {
     let mut list = list.to_vec();
     list.sort_unstable();
     list.push(list.last().unwrap() + 3); // Laptop input joltage
-    let iter = list
-        .iter()
-        .scan(0, |acc, &x| {
-            let old = *acc;
-            *acc = x;
-            Some(x - old)
-        });
+    let iter = list.iter().scan(0, |acc, &x| {
+        let old = *acc;
+        *acc = x;
+        Some(x - old)
+    });
     let mut map = HashMap::<_, usize>::new();
     for n in iter {
         *map.entry(n).or_default() += 1;
@@ -43,8 +41,7 @@ fn check_2(list: &[u32]) -> usize {
 mod tests {
     use super::*;
 
-    const INPUT: &str =
-        "16
+    const INPUT: &str = "16
         10
         15
         5
@@ -56,8 +53,7 @@ mod tests {
         12
         4";
 
-    const INPUT2: &str =
-        "28
+    const INPUT2: &str = "28
         33
         18
         42

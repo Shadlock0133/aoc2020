@@ -8,10 +8,7 @@ fn main() {
 }
 
 fn parse_input(input: &str) -> Vec<u64> {
-    input
-        .lines()
-        .map(|x| x.trim().parse().unwrap())
-        .collect()
+    input.lines().map(|x| x.trim().parse().unwrap()).collect()
 }
 
 fn is_valid(preamble: &[u64], data: u64) -> bool {
@@ -59,8 +56,7 @@ fn check_2(data: &[u64], preamble: usize) -> u64 {
 mod tests {
     use super::*;
 
-    const INPUT: &str =
-        "35
+    const INPUT: &str = "35
         20
         15
         25
