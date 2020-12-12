@@ -1,4 +1,8 @@
-use std::{env::args, fs::{File, copy}, path::PathBuf};
+use std::{
+    env::args,
+    fs::{copy, File},
+    path::PathBuf,
+};
 
 fn main() {
     let n = args().nth(1).expect("Missing day number");
