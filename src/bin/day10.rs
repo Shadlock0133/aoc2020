@@ -33,7 +33,7 @@ fn check_1(list: &[u32]) -> usize {
     map[&1] * map[&3]
 }
 
-fn check_2(list: &[u32]) -> usize {
+fn check_2(_list: &[u32]) -> usize {
     todo!()
 }
 
