@@ -33,8 +33,34 @@ fn check_1(list: &[u32]) -> usize {
     map[&1] * map[&3]
 }
 
-fn check_2(_list: &[u32]) -> usize {
-    todo!()
+fn check_2(list: &[u32]) -> usize {
+    let mut list = list.to_vec();
+    list.sort_unstable();
+
+    let iter = list
+        .iter()
+        .scan(0, |acc, &x| {
+            let old = *acc;
+            *acc = x;
+            Some(x - old)
+        });
+    let mut runs = vec![];
+    let mut current_run = 0;
+    for i in iter {
+        match i {
+            1 => current_run += 1,
+            _ => runs.push(std::mem::take(&mut current_run)),
+        }
+    }
+    if current_run > 0 {
+        runs.push(current_run);
+    }
+    runs.into_iter().filter(|x| *x >= 2).map(|x| match x {
+        0 | 1 => unreachable!(),
+        2 => 2,
+        3 => 4,
+        n => n * 3 - 5,
+    }).product()
 }
 
 #[cfg(test)]
@@ -96,7 +122,6 @@ mod tests {
     }
 
     #[test]
-    #[ignore = "not implemented"]
     fn test2() {
         let output = 8;
         let res = check_2(&parse_input(INPUT));
