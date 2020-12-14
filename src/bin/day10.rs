@@ -55,10 +55,9 @@ fn check_2(list: &[u32]) -> usize {
     if current_run > 0 {
         runs.push(current_run);
     }
-    runs.into_iter().filter(|x| *x >= 2).map(|x| match x {
-        0 | 1 => unreachable!(),
+    runs.into_iter().map(|x| match x {
+        0 | 1 => 1,
         2 => 2,
-        3 => 4,
         n => n * 3 - 5,
     }).product()
 }
