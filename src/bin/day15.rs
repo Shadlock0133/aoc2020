@@ -28,16 +28,17 @@ fn check_1(list: &[u32], nth: usize) -> u32 {
 }
 
 fn check_2(list: &[u32], nth: usize) -> u32 {
-    let mut last_seen: HashMap<_, _> = list.iter().enumerate().map(|(i, x)| (*x, i + 1)).collect();
+    let mut last_seen: HashMap<_, _> = list //
+        .iter()
+        .enumerate()
+        .map(|(i, x)| (*x, i + 1))
+        .collect();
     let mut last = *list.last().unwrap();
     for turn in last_seen.len()..nth {
-        let pos = last_seen.get_mut(&last);
-        let next = match pos {
-            Some(pos) => (turn - *pos) as u32,
-            None => 0,
-        };
-        last_seen.insert(last, turn);
-        last = next;
+        last = last_seen
+            .insert(last, turn)
+            .map(|x| (turn - x) as u32)
+            .unwrap_or_default();
     }
     last
 }
@@ -66,6 +67,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "takes too long"]
     fn test2() {
         let tests = [
             ("0,3,6", 175594),
