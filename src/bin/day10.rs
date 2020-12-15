@@ -37,13 +37,11 @@ fn check_2(list: &[u32]) -> usize {
     let mut list = list.to_vec();
     list.sort_unstable();
 
-    let iter = list
-        .iter()
-        .scan(0, |acc, &x| {
-            let old = *acc;
-            *acc = x;
-            Some(x - old)
-        });
+    let iter = list.iter().scan(0, |acc, &x| {
+        let old = *acc;
+        *acc = x;
+        Some(x - old)
+    });
     let mut runs = vec![];
     let mut current_run = 0;
     for i in iter {
@@ -55,11 +53,13 @@ fn check_2(list: &[u32]) -> usize {
     if current_run > 0 {
         runs.push(current_run);
     }
-    runs.into_iter().map(|x| match x {
-        0 | 1 => 1,
-        2 => 2,
-        n => n * 3 - 5,
-    }).product()
+    runs.into_iter()
+        .map(|x| match x {
+            0 | 1 => 1,
+            2 => 2,
+            n => n * 3 - 5,
+        })
+        .product()
 }
 
 #[cfg(test)]
