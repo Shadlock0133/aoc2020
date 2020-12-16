@@ -114,7 +114,12 @@ fn determine_rules_order<'a>(notes: &Notes<'a>) -> Vec<&'a str> {
     }
     // dedup rules
     while possible_rules.iter().any(|x| x.len() > 1) {
-        let singles = possible_rules.iter().cloned().filter(|x| x.len() == 1).flatten().collect::<Vec<_>>();
+        let singles = possible_rules
+            .iter()
+            .cloned()
+            .filter(|x| x.len() == 1)
+            .flatten()
+            .collect::<Vec<_>>();
         for column in possible_rules.iter_mut().filter(|x| x.len() > 1) {
             column.retain(|x| !singles.contains(&x));
         }
