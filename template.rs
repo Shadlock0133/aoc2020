@@ -1,5 +1,5 @@
 fn main() {
-    let input = std::fs::read_to_string("inputs/day!.txt").unwrap();
+    let input = std::fs::read_to_string("inputs/day{number}.txt").unwrap();
     let thing = parse_input(&input);
     let res = check_1(&thing);
     println!("Part 1 - Answer: {}", res);
