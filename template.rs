@@ -9,7 +9,7 @@ fn parse_input(input: &str) -> ! {
     todo!()
 }
 
-fn check_1(thing: &!) -> ! {
+fn check_1(thing: &!) -> usize {
     todo!()
 }
 
