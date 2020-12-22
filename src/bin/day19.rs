@@ -47,11 +47,7 @@ fn parse_input(input: &str) -> Input {
 }
 
 fn check_message(rules: &HashMap<usize, Rule>, mut message: &str) -> bool {
-    fn check_rule(
-        rules: &HashMap<usize, Rule>,
-        rule: usize,
-        message: &mut &str,
-    ) -> bool {
+    fn check_rule(rules: &HashMap<usize, Rule>, rule: usize, message: &mut &str) -> bool {
         dbg!(rule, &message);
         match &rules[&rule] {
             Rule::Char(c) => {
@@ -59,21 +55,17 @@ fn check_message(rules: &HashMap<usize, Rule>, mut message: &str) -> bool {
                 let ret = m.next() == Some(*c);
                 *message = m.as_str();
                 ret
-            },
+            }
             Rule::SubRules(subrules) => {
                 let m = &mut *message;
                 let r = subrules
                     .iter()
-                    .any(|r| {
-                        r.iter().all(|x| {
-                            check_rule(rules, *x, m)
-                        })
-                    });
+                    .any(|r| r.iter().all(|x| check_rule(rules, *x, m)));
                 if r {
                     *message = m;
                 }
                 r
-            },
+            }
         }
     }
     check_rule(rules, 0, &mut message)
@@ -89,7 +81,7 @@ fn check_1_lazy(input: &Input) -> usize {
 
 // fn check_1_eager(input: &Input) -> usize {
 //     let mut valid_messages = vec![];
-    
+
 //     input
 //         .messages
 //         .iter()

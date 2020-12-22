@@ -26,7 +26,8 @@ fn parse_input(input: &str) -> (Vec<u8>, Vec<u8>) {
 }
 
 fn score(cards: &[u8]) -> usize {
-    cards.iter()
+    cards
+        .iter()
         .rev()
         .enumerate()
         .map(|(i, x)| (i + 1) * *x as usize)

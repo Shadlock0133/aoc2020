@@ -19,14 +19,20 @@ fn parse_input(input: &str) -> Vec<Photo> {
         .map(|x| {
             let nl = x.find('\n').unwrap();
             let (id, rest) = x.split_at(nl);
-            let id = id.strip_prefix("Tile ").unwrap().strip_suffix(": ").unwrap().parse().unwrap();
+            let id = id
+                .strip_prefix("Tile ")
+                .unwrap()
+                .strip_suffix(": ")
+                .unwrap()
+                .parse()
+                .unwrap();
             let image = Map2D::from_str(rest);
             Photo { id, image }
         })
         .collect()
 }
 
-fn check_1(thing: &[Photo]) -> usize {
+fn check_1(_thing: &[Photo]) -> usize {
     todo!()
 }
 

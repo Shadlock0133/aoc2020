@@ -91,7 +91,11 @@ fn check_1(foods: &[Food]) -> usize {
 fn check_2(foods: &[Food]) -> String {
     let mut allergen_names = map_allergens(foods).into_iter().collect::<Vec<_>>();
     allergen_names.sort_unstable_by_key(|x| x.0);
-    allergen_names.into_iter().map(|x| x.1).collect::<Vec<_>>().join(",")
+    allergen_names
+        .into_iter()
+        .map(|x| x.1)
+        .collect::<Vec<_>>()
+        .join(",")
 }
 
 #[cfg(test)]
